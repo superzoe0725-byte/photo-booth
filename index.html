@@ -84,7 +84,7 @@ section.active {
 /* ===== 拍照按鈕 ===== */
 #captureBtn {
   position: fixed;
-bottom: env(safe-area-inset-bottom);
+  bottom: calc(env(safe-area-inset-bottom) - 8px); /* ⭐️ 往下壓 */
   left: 50%;
   transform: translateX(-50%);
   width: 60vw;
