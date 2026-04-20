@@ -242,7 +242,7 @@ captureBtn.onclick = () => {
     step++;
 
     if (step < 4) {
-      stepImg.src = `step${step + 1}.png`;
+      stepImg.src = `step${step + 1}.png?${Date.now()}`;
     }
 
     if (photos.length === 4) {
