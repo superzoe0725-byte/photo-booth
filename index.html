@@ -137,6 +137,19 @@ canvas {
   transform: scale(0.9);
   filter: brightness(0.8);
 }
+  #btnTake, #btnUpload {
+  transition: transform 0.15s ease, filter 0.1s;
+}
+  #btnTake:active, #btnUpload:active {
+  transform: scale(0.88);
+}
+  /* ===== 首頁 LOGO ===== */
+#logo {
+  width: 60%;
+  max-width: 260px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
 </style>
 </head>
 
@@ -146,6 +159,8 @@ canvas {
 
 <!-- 首頁 -->
 <section id="home">
+  <img src="logo.png" id="logo">
+
   <img src="take.png" id="btnTake" class="btn">
   <img src="upload.png" id="btnUpload" class="btn">
 </section>
