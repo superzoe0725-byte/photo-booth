@@ -25,11 +25,29 @@ section.active {
   padding-top: 30px;
 }
 
+/* ===== 首頁 LOGO ===== */
+#logo {
+  width: 80%;
+  max-width: 400px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
 /* ===== 按鈕 ===== */
 .btn {
   width: 60%;
   max-width: 300px;
-  margin: 20px;
+  margin: 25px;
+}
+
+/* ===== 首頁按鈕動畫 ===== */
+#btnTake, #btnUpload {
+  transition: transform 0.15s ease, filter 0.1s;
+}
+
+#btnTake:active, #btnUpload:active {
+  transform: scale(0.88);
+  filter: brightness(0.8);
 }
 
 /* ===== STEP + 翻轉 ===== */
@@ -80,11 +98,24 @@ canvas {
   margin-top: 20px;
 }
 
-/* ===== Download 按鈕 ===== */
+/* ===== Download + Home 區 ===== */
+#resultBtns {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 40px;
+  margin-top: 50px;
+}
 
+/* ⭐️ 比例最佳解 */
 #btnDownload {
-  height: 80px;
-  width: auto;
+  width: 220px;
+  height: auto;
+}
+
+#btnHome {
+  width: 140px;
+  height: auto;
 }
 
 #btnDownload:active,
@@ -114,39 +145,6 @@ canvas {
   50% { opacity: 0.9; }
   100% { opacity: 0; }
 }
-#resultBtns {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end; /* ⭐️ 重點：底部對齊 */
-  gap: 30px;
-  margin-top: 40px;
-}
-
-#btnHome:active {
-  transform: scale(0.95);
-}
-  /* 首頁按鈕點擊效果 */
-#btnTake, #btnUpload {
-  transition: transform 0.1s, filter 0.1s;
-}
-
-#btnTake:active, #btnUpload:active {
-  transform: scale(0.9);
-  filter: brightness(0.8);
-}
-  #btnTake, #btnUpload {
-  transition: transform 0.15s ease, filter 0.1s;
-}
-  #btnTake:active, #btnUpload:active {
-  transform: scale(0.88);
-}
-  /* ===== 首頁 LOGO ===== */
-#logo {
-  width: 60%;
-  max-width: 260px;
-  margin-top: 40px;
-  margin-bottom: 20px;
-}
 </style>
 </head>
 
@@ -157,7 +155,6 @@ canvas {
 <!-- 首頁 -->
 <section id="home">
   <img src="logo.png" id="logo">
-
   <img src="take.png" id="btnTake" class="btn">
   <img src="upload.png" id="btnUpload" class="btn">
 </section>
@@ -224,9 +221,7 @@ async function startCamera() {
   });
 
   video.srcObject = stream;
-
-  video.style.transform =
-    (facingMode === "user") ? "scaleX(-1)" : "scaleX(1)";
+  video.style.transform = (facingMode === "user") ? "scaleX(-1)" : "scaleX(1)";
 }
 
 /* 切鏡頭 */
@@ -245,7 +240,7 @@ btnTake.onclick = async () => {
   await startCamera();
 };
 
-/* 閃光（強制重繪） */
+/* 閃光 */
 function triggerFlash() {
   flash.classList.remove("flash-active");
   void flash.offsetWidth;
@@ -264,7 +259,6 @@ captureBtn.onclick = () => {
     const tctx = temp.getContext("2d");
 
     const size = Math.min(video.videoWidth, video.videoHeight);
-
     temp.width = size;
     temp.height = size;
 
@@ -355,29 +349,20 @@ function render() {
 /* 下載 */
 document.getElementById("btnDownload").onclick = () => {
   const link = document.createElement("a");
-
   const now = new Date();
-  const fileName = `life4_${now.getTime()}.png`;
-
-  link.download = fileName;
+  link.download = `life4_${now.getTime()}.png`;
   link.href = canvas.toDataURL("image/png");
   link.click();
 };
- document.getElementById("btnHome").onclick = () => {
 
-  // 關閉相機（避免卡住）
-  if (stream) {
-    stream.getTracks().forEach(track => track.stop());
-  }
+/* 回首頁 */
+document.getElementById("btnHome").onclick = () => {
+  if (stream) stream.getTracks().forEach(track => track.stop());
 
-  // 重置資料
   photos = [];
   step = 0;
-
-  // 重置 step 顯示（防止殘留）
   stepImg.src = "step1.png?" + Date.now();
 
-  // 回首頁
   showPage("home");
 };
 </script>
