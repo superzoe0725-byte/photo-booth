@@ -29,24 +29,28 @@ section.active {
 #logo {
   width: 70%;
   max-width: 320px;
-  margin-top: 30px;   /* 原本太高 → 壓下來 */
+  margin-top: 30px;
   margin-bottom: 10px;
 }
 
-/* ===== 按鈕 ===== */
+/* ===== 按鈕（共用）===== */
 .btn {
-  width: 60%;
+  width: 60%;              /* ⭐️ 修正爆大關鍵 */
   max-width: 280px;
   margin: 20px;
 }
-  #btnUpload {
-  width: 55%;
-  max-width: 260px;
-  margin: 10px 0 0 0;  /* ⭐️ 原本太下面 → 拉上來 */
-}
-  #btnTake {
+
+/* ===== 主 / 次按鈕 ===== */
+#btnTake {
   width: 70%;
   max-width: 320px;
+  margin: 15px 0;
+}
+
+#btnUpload {
+  width: 55%;
+  max-width: 260px;
+  margin: 10px 0 0 0;
 }
 
 /* ===== 首頁按鈕動畫 ===== */
@@ -69,8 +73,8 @@ section.active {
 }
 
 #stepImg {
-  width: 55vw;       /* 原本40 → 放大 */
-  max-width: 300px; /* 原本220 → 放大 */
+  width: 55vw;
+  max-width: 300px;
 }
 
 #flipBtn {
@@ -89,7 +93,7 @@ section.active {
 /* ===== 拍照按鈕 ===== */
 #captureBtn {
   position: fixed;
-  bottom: calc(env(safe-area-inset-bottom) - 8px); /* ⭐️ 往下壓 */
+  bottom: calc(env(safe-area-inset-bottom) - 8px);
   left: 50%;
   transform: translateX(-50%);
   width: 60vw;
@@ -107,7 +111,7 @@ canvas {
   margin-top: 20px;
 }
 
-/* ===== Download + Home 區 ===== */
+/* ===== Download + Home ===== */
 #resultBtns {
   display: flex;
   justify-content: center;
@@ -116,7 +120,6 @@ canvas {
   margin-top: 50px;
 }
 
-/* ⭐️ 比例最佳解 */
 #btnDownload {
   width: 220px;
   height: auto;
@@ -132,7 +135,7 @@ canvas {
   transform: scale(0.95);
 }
 
-/* ===== 閃光效果 ===== */
+/* ===== 閃光 ===== */
 #flash {
   position: fixed;
   top: 0;
