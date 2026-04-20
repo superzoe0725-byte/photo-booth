@@ -344,12 +344,11 @@ function drawPhoto(img, x, y, w, h, rotate = 0) {
 function render() {
   canvas.width = 1080;
   canvas.height = 1920;
-
-  drawPhoto(photos[0], 55, 303, 400, 400, -0.14);
-  drawPhoto(photos[1], 120, 750, 360, 360, -0.12);
-  drawPhoto(photos[2], 170, 940, 400, 400, -0.13);
-  drawPhoto(photos[3], 640, 360, 470, 490, 0.13);
-
+drawPhoto(photos[0], 55, 303, 400, 400, -0.14);
+  drawPhoto(photos[1], 120, 665, 400, 400, -0.13);
+  drawPhoto(photos[2], 170, 955, 400, 400, -0.14);
+  drawPhoto(photos[3], 520, 345, 600, 620, 0.12);
+ 
   const frame = new Image();
   frame.src = "frame.png";
 
