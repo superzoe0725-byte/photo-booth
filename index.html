@@ -342,7 +342,21 @@ document.getElementById("btnDownload").onclick = () => {
   link.href = canvas.toDataURL("image/png");
   link.click();
 };
-  document.getElementById("btnHome").onclick = () => {
+ document.getElementById("btnHome").onclick = () => {
+
+  // 關閉相機（避免卡住）
+  if (stream) {
+    stream.getTracks().forEach(track => track.stop());
+  }
+
+  // 重置資料
+  photos = [];
+  step = 0;
+
+  // 重置 step 顯示（防止殘留）
+  stepImg.src = "step1.png?" + Date.now();
+
+  // 回首頁
   showPage("home");
 };
 </script>
