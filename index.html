@@ -83,7 +83,7 @@ section.active {
   bottom: calc(20px + env(safe-area-inset-bottom)); /* ⭐️ 重點 */
   left: 50%;
   transform: translateX(-50%);
-  width: 32vw;
+  width: 50vw;
   max-width: 200px;
   transition: transform 0.1s;
 }
@@ -335,7 +335,7 @@ function render() {
   drawPhoto(photos[0], 55, 303, 400, 400, -0.14);
   drawPhoto(photos[1], 120, 665, 400, 400, -0.13);
   drawPhoto(photos[2], 170, 955, 400, 400, -0.14);
-  drawPhoto(photos[3], 520, 345, 600, 620, 0.12);
+  drawPhoto(photos[3], 490, 345, 600, 620, 0.12);
 
   const frame = new Image();
   frame.src = "frame.png";
