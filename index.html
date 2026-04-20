@@ -170,18 +170,43 @@ btnTake.onclick = async () => {
 captureBtn.onclick = () => {
   if (step >= 4) return;
 
-  const temp = document.createElement("canvas");
-  temp.width = video.videoWidth;
-  temp.height = video.videoHeight;
+ captureBtn.onclick = () => {
+  if (step >= 4) return;
 
+  const temp = document.createElement("canvas");
   const tctx = temp.getContext("2d");
 
+  // ⭐️ 重點：裁切成正方形
+  const size = Math.min(video.videoWidth, video.videoHeight);
+
+  temp.width = size;
+  temp.height = size;
+
+  const sx = (video.videoWidth - size) / 2;
+  const sy = (video.videoHeight - size) / 2;
+
   if (facingMode === "user") {
-    tctx.translate(temp.width, 0);
+    tctx.translate(size, 0);
     tctx.scale(-1, 1);
   }
 
-  tctx.drawImage(video, 0, 0);
+  tctx.drawImage(
+    video,
+    sx, sy, size, size, // 裁切來源
+    0, 0, size, size    // 畫到canvas
+  );
+
+  photos.push(temp);
+  step++;
+
+  if (step < 4) {
+    stepImg.src = `step${step + 1}.png`;
+  }
+
+  if (photos.length === 4) {
+    render();
+  }
+};
   photos.push(temp);
 
   step++;
@@ -255,8 +280,8 @@ function render() {
 
   // 左三格
   drawPhoto(photos[0], 55, 303, 400, 400, -0.14);
-  drawPhoto(photos[1], 120, 665, 360, 300, -0.13);
-  drawPhoto(photos[2], 170, 955, 365, 300, -0.14);
+  drawPhoto(photos[1], 120, 665, 400, 400, -0.13);
+  drawPhoto(photos[2], 170, 955, 400, 400, -0.14);
 
   // 右大格
   drawPhoto(photos[3], 520, 345, 600, 620, 0.12);
