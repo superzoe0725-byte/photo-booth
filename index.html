@@ -80,7 +80,7 @@ section.active {
 /* ===== 拍照按鈕 ===== */
 #captureBtn {
   position: fixed;
-  bottom: 10px;
+  bottom: calc(20px + env(safe-area-inset-bottom)); /* ⭐️ 重點 */
   left: 50%;
   transform: translateX(-50%);
   width: 32vw;
