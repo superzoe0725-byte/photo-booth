@@ -66,10 +66,33 @@ canvas {
   width: 90%;
   margin-top: 20px;
 }
+
+/* ✨ 閃光效果 */
+#flash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.flash-active {
+  animation: flashAnim 0.2s;
+}
+
+@keyframes flashAnim {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
 </style>
 </head>
 
 <body>
+
+<div id="flash"></div>
 
 <!-- 首頁 -->
 <section id="home">
@@ -93,7 +116,7 @@ canvas {
 <!-- 結果 -->
 <section id="result">
   <canvas id="canvas"></canvas>
-  <button id="downloadBtn">下載</button>
+  <button id="btnDownload">Download</button>
 </section>
 
 <script>
@@ -107,34 +130,25 @@ const captureBtn = document.getElementById("captureBtn");
 const flipBtn = document.getElementById("flipBtn");
 const fileInput = document.getElementById("fileInput");
 const stepImg = document.getElementById("stepImg");
+const flash = document.getElementById("flash");
 
 let photos = [];
 let step = 0;
 let facingMode = "user";
 let stream = null;
 
-/* ========================
-   頁面切換（修正不閃）
-======================== */
+/* 頁面切換 */
 function showPage(id) {
   document.querySelectorAll("section").forEach(sec => sec.classList.remove("active"));
   document.getElementById(id).classList.add("active");
   location.hash = id;
 }
 
-window.addEventListener("hashchange", () => {
-  const page = location.hash.replace("#", "");
-  if (page) showPage(page);
-});
-
 window.onload = () => {
-  const page = location.hash.replace("#", "") || "home";
-  showPage(page);
+  showPage("home");
 };
 
-/* ========================
-   相機
-======================== */
+/* 相機 */
 async function startCamera() {
   if (stream) {
     stream.getTracks().forEach(track => track.stop());
@@ -166,17 +180,23 @@ btnTake.onclick = async () => {
   await startCamera();
 };
 
-/* 拍照 */
+/* ✨ 閃光效果 */
+function triggerFlash() {
+  flash.classList.add("flash-active");
+  setTimeout(() => {
+    flash.classList.remove("flash-active");
+  }, 200);
+}
+
+/* 拍照（已修正） */
 captureBtn.onclick = () => {
   if (step >= 4) return;
 
- captureBtn.onclick = () => {
-  if (step >= 4) return;
+  triggerFlash(); // ⭐️ 閃一下
 
   const temp = document.createElement("canvas");
   const tctx = temp.getContext("2d");
 
-  // ⭐️ 重點：裁切成正方形
   const size = Math.min(video.videoWidth, video.videoHeight);
 
   temp.width = size;
@@ -190,11 +210,7 @@ captureBtn.onclick = () => {
     tctx.scale(-1, 1);
   }
 
-  tctx.drawImage(
-    video,
-    sx, sy, size, size, // 裁切來源
-    0, 0, size, size    // 畫到canvas
-  );
+  tctx.drawImage(video, sx, sy, size, size, 0, 0, size, size);
 
   photos.push(temp);
   step++;
@@ -207,25 +223,9 @@ captureBtn.onclick = () => {
     render();
   }
 };
-  photos.push(temp);
 
-  step++;
-
-  if (step < 4) {
-    stepImg.src = `step${step + 1}.png`;
-  }
-
-  if (photos.length === 4) {
-    render();
-  }
-};
-
-/* ========================
-   上傳（修正重點🔥）
-======================== */
-btnUpload.onclick = () => {
-  fileInput.click();
-};
+/* 上傳 */
+btnUpload.onclick = () => fileInput.click();
 
 fileInput.onchange = (e) => {
   const files = e.target.files;
@@ -243,9 +243,7 @@ fileInput.onchange = (e) => {
 
     img.onload = () => {
       loaded++;
-      if (loaded === 4) {
-        render(); // ✅ 全部載入才畫
-      }
+      if (loaded === 4) render();
     };
 
     img.src = URL.createObjectURL(files[i]);
@@ -253,12 +251,9 @@ fileInput.onchange = (e) => {
   }
 };
 
-/* ========================
-   畫照片（你的原邏輯）
-======================== */
+/* 畫照片 */
 function drawPhoto(img, x, y, w, h, rotate = 0) {
   ctx.save();
-
   ctx.translate(x + w / 2, y + h / 2);
   ctx.rotate(rotate);
 
@@ -267,26 +262,19 @@ function drawPhoto(img, x, y, w, h, rotate = 0) {
   const dh = img.height * scale;
 
   ctx.drawImage(img, -dw / 2, -dh / 2, dw, dh);
-
   ctx.restore();
 }
 
-/* ========================
-   合成
-======================== */
+/* 合成 */
 function render() {
   canvas.width = 1080;
   canvas.height = 1920;
 
-  // 左三格
   drawPhoto(photos[0], 55, 303, 400, 400, -0.14);
   drawPhoto(photos[1], 120, 665, 400, 400, -0.13);
   drawPhoto(photos[2], 170, 955, 400, 400, -0.14);
-
-  // 右大格
   drawPhoto(photos[3], 520, 345, 600, 620, 0.12);
 
-  // 外框
   const frame = new Image();
   frame.src = "frame.png";
 
@@ -296,13 +284,16 @@ function render() {
   };
 }
 
-/* ========================
-   下載
-======================== */
-document.getElementById("downloadBtn").onclick = () => {
+/* 下載 */
+document.getElementById("btnDownload").onclick = () => {
   const link = document.createElement("a");
-  link.download = "photo.png";
-  link.href = canvas.toDataURL();
+
+  // ⭐️ 檔名優化
+  const now = new Date();
+  const fileName = `life4_${now.getTime()}.png`;
+
+  link.download = fileName;
+  link.href = canvas.toDataURL("image/png");
   link.click();
 };
 </script>
