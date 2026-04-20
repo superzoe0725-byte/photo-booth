@@ -128,7 +128,7 @@ canvas {
 #btnHome {
   width: 140px;
   height: auto;
-  transform: translateY(-30px); /* ⭐️ 往上 */
+  transform: translateY(-12px); /* ⭐️ 原本-30 → 改這個 */
 }
 
 #btnDownload:active,
@@ -344,10 +344,10 @@ function drawPhoto(img, x, y, w, h, rotate = 0) {
 function render() {
   canvas.width = 1080;
   canvas.height = 1920;
-drawPhoto(photos[0], 55, 303, 400, 400, -0.14);
-  drawPhoto(photos[1], 120, 665, 400, 400, -0.13);
-  drawPhoto(photos[2], 170, 955, 400, 400, -0.14);
-  drawPhoto(photos[3], 520, 345, 600, 620, 0.12);
+drawPhoto(photos[0], 70, 290, 400, 400, -0.12);
+drawPhoto(photos[1], 130, 640, 400, 400, -0.12);
+drawPhoto(photos[2], 180, 930, 400, 400, -0.12);
+drawPhoto(photos[3], 500, 330, 620, 640, 0.10);
  
   const frame = new Image();
   frame.src = "frame.png";
