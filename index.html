@@ -80,7 +80,7 @@ section.active {
 /* ===== 拍照按鈕 ===== */
 #captureBtn {
   position: fixed;
-  bottom: calc(5px + env(safe-area-inset-bottom)); /* ⭐️ 原20 → 5 */
+bottom: env(safe-area-inset-bottom);
   left: 50%;
   transform: translateX(-50%);
   width: 60vw;
@@ -333,8 +333,8 @@ function render() {
   canvas.height = 1920;
 
   drawPhoto(photos[0], 55, 303, 400, 400, -0.14);
-  drawPhoto(photos[1], 120, 660, 400, 400, -0.12);
-  drawPhoto(photos[2], 170, 950, 400, 400, -0.13);
+  drawPhoto(photos[1], 120, 630, 400, 400, -0.12);
+  drawPhoto(photos[2], 170, 940, 400, 400, -0.13);
   drawPhoto(photos[3], 370, 345, 590, 590, 0.12);
 
   const frame = new Image();
