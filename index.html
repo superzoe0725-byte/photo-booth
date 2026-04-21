@@ -344,12 +344,26 @@ fileInput.onchange = (e) => {
     const img = new Image();
 
     img.onload = () => {
+      // ⭐️ 裁成正方形（關鍵）
+      const temp = document.createElement("canvas");
+      const tctx = temp.getContext("2d");
+
+      const size = Math.min(img.width, img.height);
+      temp.width = size;
+      temp.height = size;
+
+      const sx = (img.width - size) / 2;
+      const sy = (img.height - size) / 2;
+
+      tctx.drawImage(img, sx, sy, size, size, 0, 0, size, size);
+
+      photos[i] = temp;
+
       loaded++;
       if (loaded === 4) render();
     };
 
     img.src = URL.createObjectURL(files[i]);
-    photos.push(img);
   }
 };
 
