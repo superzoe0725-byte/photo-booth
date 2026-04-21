@@ -21,17 +21,11 @@ section.active {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding-top: 10px;
+  justify-content: center; /* ⭐️ 置中 */
+  padding-top: 80px;       /* ⭐️ 整體往下 */
 }
 
-/* ===== 首頁 LOGO ===== */
-#logo {
-  width: 70%;
-  max-width: 320px;
-  margin-top: 30px;
-  margin-bottom: 10px;
-}
+
 
 /* ===== 按鈕（共用）===== */
 .btn {
@@ -42,15 +36,23 @@ section.active {
 
 /* ===== 主 / 次按鈕 ===== */
 #btnTake {
-  width: 70%;
-  max-width: 320px;
-  margin: 15px 0;
+  width: 80%;
+  max-width: 380px;
+    margin-top: 120px; /* ⭐️ 控制往下程度 */
+  margin: 25px 0;
 }
 
 #btnUpload {
-  width: 55%;
-  max-width: 260px;
-  margin: 10px 0 0 0;
+  width: 70%;
+  max-width: 320px;
+  margin: 15px 0 0 0;
+}
+ #btnTake, #btnUpload {
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s, box-shadow 0.15s;
+
+  box-shadow: 0 10px 0 #000;   /* ⭐️ 底部厚陰影 = 按鈕感 */
+  border-radius: 20px;         /* ⭐️ 圓角更像UI */
 }
 
 /* ===== 首頁按鈕動畫 ===== */
@@ -59,8 +61,18 @@ section.active {
 }
 
 #btnTake:active, #btnUpload:active {
-  transform: scale(0.88);
-  filter: brightness(0.8);
+  transform: translateY(6px) scale(0.95); /* ⭐️ 往下壓 */
+  box-shadow: 0 4px 0 #000;              /* ⭐️ 陰影變短 */
+}
+  #btnTake:hover, #btnUpload:hover {
+  transform: translateY(-2px);
+}
+  #btnTake {
+  box-shadow: 0 12px 0 #000;
+}
+
+#btnUpload {
+  box-shadow: 0 8px 0 #000;
 }
 
 /* ===== STEP + 翻轉 ===== */
@@ -167,7 +179,6 @@ canvas {
 
 <!-- 首頁 -->
 <section id="home">
-  <img src="logo.png" id="logo">
   <img src="take.png" id="btnTake" class="btn">
   <img src="upload.png" id="btnUpload" class="btn">
 </section>
