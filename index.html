@@ -122,9 +122,11 @@ section {
 /* ===== 拍照按鈕 ===== */
 #captureBtn {
   position: fixed;
-  bottom: calc(env(safe-area-inset-bottom) + 10px); /* ⭐️ 稍微貼底但安全 */
+  bottom: calc(env(safe-area-inset-bottom) + 20px); /* ⭐️ 稍微貼底但安全 */
   left: 50%;
   transform: translateX(-50%);
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.3));
+
 }
 
 #captureBtn:active {
@@ -369,7 +371,7 @@ function render() {
   canvas.width = 1080;
   canvas.height = 1920;
 drawPhoto(photos[0], 70, 290, 390, 390, -0.12);
-drawPhoto(photos[1], 130, 660, 390, 390, -0.12);
+drawPhoto(photos[1], 130, 650, 390, 390, -0.12);
 drawPhoto(photos[2], 165, 940, 400, 400, -0.12);
 drawPhoto(photos[3], 490, 330, 590, 590, 0.10);
  
