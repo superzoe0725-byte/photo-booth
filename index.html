@@ -122,12 +122,9 @@ section {
 /* ===== 拍照按鈕 ===== */
 #captureBtn {
   position: fixed;
-  bottom: 10px;
+  bottom: calc(env(safe-area-inset-bottom) + 10px); /* ⭐️ 稍微貼底但安全 */
   left: 50%;
   transform: translateX(-50%);
-  width: 60vw;
-  max-width: 260px;
-  z-index: 1000;
 }
 
 #captureBtn:active {
