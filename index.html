@@ -71,12 +71,12 @@ section {
   max-width: 320px;
   margin: 15px 0 0 0;
 }
- #btnTake, #btnUpload {
+#btnTake, #btnUpload {
   cursor: pointer;
-  transition: transform 0.15s ease, filter 0.15s, box-shadow 0.15s;
+  transition: transform 0.15s ease, filter 0.15s;
 
-  box-shadow: 0 10px 0 #000;   /* ⭐️ 底部厚陰影 = 按鈕感 */
-  border-radius: 20px;         /* ⭐️ 圓角更像UI */
+  box-shadow: none;   /* ⭐️ 關鍵 */
+  border-radius: 0;   /* ⭐️ 不規則圖不要圓角 */
 }
 
 /* ===== 首頁按鈕動畫 ===== */
@@ -374,9 +374,9 @@ function render() {
   canvas.width = 1080;
   canvas.height = 1920;
 drawPhoto(photos[0], 70, 290, 400, 400, -0.12);
-drawPhoto(photos[1], 130, 640, 400, 400, -0.12);
-drawPhoto(photos[2], 180, 930, 400, 400, -0.12);
-drawPhoto(photos[3], 500, 330, 620, 640, 0.10);
+drawPhoto(photos[1], 130, 640, 390, 390, -0.12);
+drawPhoto(photos[2], 180, 940, 400, 400, -0.12);
+drawPhoto(photos[3], 500, 330, 600, 600, 0.10);
  
   const frame = new Image();
   frame.src = "frame.png";
