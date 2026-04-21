@@ -11,14 +11,14 @@
 /* ===== 頁面 ===== */
 section {
   display: none;
-  height: 100dvh; /* ⭐️ 更穩（手機專用） */
+  height: 100dvh; 
   width: 100vw;
 }
 
-/* ⭐️ 放在這裡 */
+
 #home {
   background: url("bg.jpg") no-repeat center center;
-  background-size: cover; /* ⭐️ 一定要加 */
+  background-size: cover; 
 }
 
 #camera {
@@ -27,7 +27,7 @@ section {
 }
 
 #result {
-    background: none; /* ⭐️ 拿掉背景 */
+    background: none; 
 }
 /* 首頁 */
 #home.active {
@@ -52,7 +52,7 @@ section {
 
 /* ===== 按鈕（共用）===== */
 .btn {
-  width: 60%;              /* ⭐️ 修正爆大關鍵 */
+  width: 60%;             
   max-width: 280px;
   margin: 20px;
 }
@@ -61,7 +61,7 @@ section {
 #btnTake {
   width: 80%;
   max-width: 380px;
-    margin-top: 160px; /* ⭐️ 控制往下程度 */
+    margin-top: 160px;
   margin: 25px 0;
 }
 
@@ -74,8 +74,8 @@ section {
   cursor: pointer;
   transition: transform 0.15s ease, filter 0.15s;
 
-  box-shadow: none;   /* ⭐️ 關鍵 */
-  border-radius: 0;   /* ⭐️ 不規則圖不要圓角 */
+  box-shadow: none;   
+  border-radius: 0;  
 }
 
 /* ===== 首頁按鈕動畫 ===== */
@@ -84,7 +84,7 @@ section {
 }
 
 #btnTake:active, #btnUpload:active {
-  transform: translateY(6px) scale(0.95); /* ⭐️ 往下壓 */
+  transform: translateY(6px) scale(0.95); 
  
 }
   #btnTake:hover, #btnUpload:hover {
@@ -122,12 +122,12 @@ section {
 /* ===== 拍照按鈕 ===== */
 #captureBtn {
   position: fixed;
-  bottom: 20px; /* ⭐️ 先用固定值測試 */
+  bottom: 20px; 
   left: 50%;
   transform: translateX(-50%);
   width: 60vw;
   max-width: 260px;
-  z-index: 9999; /* ⭐️ 關鍵：避免被蓋住 */
+  z-index: 9999; 
 }
 
 #captureBtn:active {
@@ -344,7 +344,7 @@ fileInput.onchange = (e) => {
     const img = new Image();
 
     img.onload = () => {
-      // ⭐️ 裁成正方形（關鍵）
+      // 裁成正方形
       const temp = document.createElement("canvas");
       const tctx = temp.getContext("2d");
 
