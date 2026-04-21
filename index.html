@@ -62,7 +62,7 @@ section {
 #btnTake {
   width: 80%;
   max-width: 380px;
-    margin-top: 120px; /* ⭐️ 控制往下程度 */
+    margin-top: 160px; /* ⭐️ 控制往下程度 */
   margin: 25px 0;
 }
 
@@ -147,7 +147,7 @@ canvas {
   justify-content: center;
   align-items: center; 
   gap: 40px;
-  margin-top: -20px;
+  margin-top: -40px;
 }
   
 
@@ -372,7 +372,7 @@ function drawPhoto(img, x, y, w, h, rotate = 0) {
 function render() {
   canvas.width = 1080;
   canvas.height = 1920;
-drawPhoto(photos[0], 70, 290, 400, 400, -0.12);
+drawPhoto(photos[0], 70, 290, 390, 390, -0.12);
 drawPhoto(photos[1], 130, 660, 390, 390, -0.12);
 drawPhoto(photos[2], 165, 940, 400, 400, -0.12);
 drawPhoto(photos[3], 490, 330, 590, 590, 0.10);
