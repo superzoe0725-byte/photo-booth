@@ -6,23 +6,47 @@
 <title>一起來拍照</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: sans-serif;
-  text-align: center;
+
+
+/* ===== 頁面 ===== */
+section {
+  display: none;
+  height: 100dvh; /* ⭐️ 更穩（手機專用） */
+  width: 100vw;
+}
+
+/* ⭐️ 放在這裡 */
+#home {
   background: url("bg.jpg") no-repeat center center;
+  background-size: cover; /* ⭐️ 一定要加 */
+}
+
+#camera {
+  background: url("camera-bg.jpg") no-repeat center center;
   background-size: cover;
 }
 
-/* ===== 頁面 ===== */
-section { display: none; height: 100vh; }
-
-section.active {
+#result {
+  background: url("result-bg.jpg") no-repeat center center;
+  background-size: cover;
+}
+/* 首頁 */
+#home.active {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* ⭐️ 置中 */
-  padding-top: 80px;       /* ⭐️ 整體往下 */
+  justify-content: center;
+  padding-top: 80px;
+}
+
+/* 拍照 + 成品 */
+#camera.active,
+#result.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 10px;
 }
 
 
@@ -62,18 +86,12 @@ section.active {
 
 #btnTake:active, #btnUpload:active {
   transform: translateY(6px) scale(0.95); /* ⭐️ 往下壓 */
-  box-shadow: 0 4px 0 #000;              /* ⭐️ 陰影變短 */
+ 
 }
   #btnTake:hover, #btnUpload:hover {
   transform: translateY(-2px);
 }
-  #btnTake {
-  box-shadow: 0 12px 0 #000;
-}
 
-#btnUpload {
-  box-shadow: 0 8px 0 #000;
-}
 
 /* ===== STEP + 翻轉 ===== */
 #stepRow {
