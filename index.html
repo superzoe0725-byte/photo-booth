@@ -145,7 +145,7 @@ canvas {
 #resultBtns {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center; 
   gap: 40px;
   margin-top: -20px;
 }
@@ -158,7 +158,6 @@ canvas {
 #btnHome {
   width: 140px;
   height: auto;
-  transform: translateY(-12px); /* ⭐️ 原本-30 → 改這個 */
 }
 
 #btnDownload:active,
@@ -374,9 +373,9 @@ function render() {
   canvas.width = 1080;
   canvas.height = 1920;
 drawPhoto(photos[0], 70, 290, 400, 400, -0.12);
-drawPhoto(photos[1], 130, 640, 390, 390, -0.12);
+drawPhoto(photos[1], 130, 660, 390, 390, -0.12);
 drawPhoto(photos[2], 180, 940, 400, 400, -0.12);
-drawPhoto(photos[3], 500, 330, 600, 600, 0.10);
+drawPhoto(photos[3], 490, 330, 590, 590, 0.10);
  
   const frame = new Image();
   frame.src = "frame.png";
